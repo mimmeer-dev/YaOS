@@ -17,7 +17,7 @@ $(FLOPPY_IMG): $(BOOTLD_OUT)
 	@# add a bootloader
 	dd if=$(BOOTLD_OUT) of=$(FLOPPY_IMG) conv=notrunc
 
-$(BOOTLD_OUT): $(BOOTLD_DIR)/src
+$(BOOTLD_OUT): $(BOOTLD_DIR)/src/main.asm
 	@$(MAKE) -C $(BOOTLD_DIR)
 
 clean:
