@@ -13,7 +13,7 @@ main:
     sti ; re-enable interrupts
     mov si, bootmsg
     call print
-    jmp $ ; hang to show we booted
+    jmp protmode
 
 ; PRINT
 ; DS:SI : String Address
@@ -32,6 +32,16 @@ print:
 .end:
     popa
     ret
+
+%include "src/gdt.asm"
+
+protmode:
+    cli
+    lgdt [gdt_descriptor]
+    mov eax, cr0
+    or eax, 0x1
+    mov cr0, eax
+    hlt ; finished for now
 
 bootmsg: db "YaOS: Yet another OS - Bootloader",0x00
 
