@@ -1,3 +1,4 @@
+#include "video.h"
 #include <stdbool.h>
 
 char* video_memory = (char*) 0xb8000;
