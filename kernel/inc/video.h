@@ -1,15 +1,22 @@
 #ifndef _YAOS_K_VIDEOH
 #define _YAOS_K_VIDEOH
 
-#define SCREEN_WIDTH 80
-#define SCREEN_HEIGHT 25
+#define VGA_SCREEN_WIDTH 80
+#define VGA_SCREEN_HEIGHT 25
 
-void kputchr(int x, int y, char c, unsigned char attributes);
+#define VGA_CTRL_PORT 0x3D4
+#define VGA_DATA_PORT 0x3D5
 
-void putchar(char c, unsigned char attributes);
+void cursor_pos(int x, int y);
 
-void putstr(char *c, unsigned char attributes);
+void putchar(char c);
 
 void clear(unsigned char attributes);
+
+void kprint(char *c);
+
+void aputchar(int x, int y, char c, unsigned char attributes);
+
+void set_attrib(unsigned char attributes);
 
 #endif

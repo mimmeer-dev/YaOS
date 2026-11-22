@@ -17,7 +17,7 @@ main:
     mov ax, 0x0000
     mov es, ax
     mov bx, 0x1000
-    mov dh, 0x01
+    mov dh, 0x1C
     call disk_load
     jmp protmode
 
