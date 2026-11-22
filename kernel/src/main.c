@@ -29,16 +29,17 @@ void menu() {
 void _kentry() {
     menu();
     while (true) {
-        uint8_t key = inb(0x60);
-        if (key!=0) {
+        if (inb(0x64) & 1) {
+            uint8_t key = inb(0x60);
+            if (key & 0x80) {
+                continue;
+            }
             if (key==2) {
-                PIC_sendEOI(0x20);
                 rainbow();
                 menu();
             }
             else if (key==3)
             {
-                PIC_sendEOI(0x20);
                 bootdos();
                 menu();
             }
