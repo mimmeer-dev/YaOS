@@ -1,4 +1,5 @@
 #include "video.h"
+#include "io.h"
 
 void rainbow() {
     clear(0x00);
@@ -19,5 +20,14 @@ void rainbow() {
     kprint("This text blinks.\n\n\n");
     set_attrib(0x0F);
     kprint("Press SPACE to return.");
+    while (1) {
+        uint8_t key = inb(0x60);
+        if (key!=0) {
+            if (key==0x39) {
+                PIC_sendEOI(0x20);
+                break;
+            }
+        }
+    }
     return;
 }
