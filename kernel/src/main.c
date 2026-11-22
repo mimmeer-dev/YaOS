@@ -2,7 +2,6 @@
 #include "io.h"
 #include <stdbool.h>
 #include "rainbow_demo.h"
-#include "bootdos.h"
 
 void menu() {
     clear(0x0F);
@@ -18,7 +17,6 @@ void menu() {
     kprint("=========\n\n");
     set_attrib(0x07);
     kprint("1: Rainbow Demo\n");
-    kprint("2: Recreation of BootDOS\n\n");
     set_attrib(0x0F);
     kprint("Press a key to select.\n\n");
     kprint("This project is open-source:\n");
@@ -37,13 +35,7 @@ void _kentry() {
             if (key==2) {
                 rainbow();
                 menu();
-            }
-            else if (key==3)
-            {
-                bootdos();
-                menu();
-            }
-            
+            }            
         }
     }
     return;
