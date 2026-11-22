@@ -1,3 +1,4 @@
+rwildcard = $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $2,$d))
 QEMU := qemu-system-i386
 QEMU_ARGS := -m 1G # this OS will target 1GB of RAM
 
@@ -15,8 +16,7 @@ FLOPPY_IMG := $(DIST_DIR)/yaos.img # WILL be removed later
 # Ensure kernel can recompile
 KRNL_C_FILES := $(call rwildcard,$(KRNL_DIR)/src/,%.c)
 KRNL_ASM_FILES := $(call rwildcard,$(KRNL_DIR)/src/,%.asm)
-KRNL_SRC_FILES := $(ASM_FILES) $(C_FILES)
-KRNL_FILES := $(addprefix $(KRNL_DIR)/src/, $(basename $(SRC_FILES)))
+KRNL_SRC_FILES := $(KRNL_ASM_FILES) $(KRNL_C_FILES)
 
 .PHONY: run, clean
 
@@ -29,7 +29,7 @@ $(FLOPPY_IMG): $(BOOTLD_OUT) $(KERNEL_OUT)
 $(BOOTLD_OUT): $(BOOTLD_DIR)/src/main.asm
 	@$(MAKE) -C $(BOOTLD_DIR)
 
-$(KERNEL_OUT): $(KRNL_FILES)
+$(KERNEL_OUT): $(KRNL_SRC_FILES)
 	@$(MAKE) -C $(KRNL_DIR)
 
 clean:

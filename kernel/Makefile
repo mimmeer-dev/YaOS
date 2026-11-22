@@ -24,7 +24,7 @@ $(BUILD_DIR)/%.o: %.asm
 
 $(BUILD_DIR)/%.o: %.c
 	mkdir -p $(dir $@)
-	$(CC) $(CC_FLAGS) $< -c -o $@
+	$(CC) $(CC_FLAGS) $< -c -o $@ -Iinc/
 
 clean:
 	-rm -r build
