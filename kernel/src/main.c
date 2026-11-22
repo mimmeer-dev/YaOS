@@ -1,4 +1,7 @@
 #include "video.h"
+#include "io.h"
+#include <stdbool.h>
+#include "rainbow_demo.h"
 
 void _kentry() {
     clear(0x0F);
@@ -9,23 +12,8 @@ void _kentry() {
     kprint("The kernel is printing this text... ");
     set_attrib(0x5D);
     kprint("using 32-bit protected mode! :D\n");
-    char *string = "Isn't this so cool?\n";
-    set_attrib(0x4C);
-    kprint(string);
-    set_attrib(0x6E);
-    kprint(string);
-    set_attrib(0x2A);
-    kprint(string);
-    set_attrib(0x3B);
-    kprint(string);
-    set_attrib(0x19);
-    kprint(string);
-    set_attrib(0x5D);
-    kprint(string);
-    set_attrib(0x87);
-    kprint("This text blinks.\n\n\n");
     set_attrib(0x0F);
-    kprint("DEMO MENU\n");
+    kprint("\n\nDEMO MENU\n");
     kprint("=========\n\n");
     set_attrib(0x07);
     kprint("1: Rainbow Demo\n");
@@ -35,5 +23,14 @@ void _kentry() {
     kprint("This project is open-source:\n");
     set_attrib(0x0B);
     kprint("https://github.com/mimmeer-dev/YaOS");
+    while (true) {
+        uint8_t key = inb(0x60);
+        if (key!=0) {
+            if (key==2) {
+                PIC_sendEOI(0x20);
+                rainbow();
+            }
+        }
+    }
     return;
 }
