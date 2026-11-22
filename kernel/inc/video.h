@@ -10,4 +10,6 @@ void putchar(char c, unsigned char attributes);
 
 void putstr(char *c, unsigned char attributes);
 
+void clear(unsigned char attributes);
+
 #endif

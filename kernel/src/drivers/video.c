@@ -39,3 +39,14 @@ void putstr(char *c, unsigned char attributes) {
     }
     return;
 }
+
+void clear(unsigned char attributes) {
+    for (int i=0; i>(SCREEN_WIDTH*SCREEN_HEIGHT); i++) {
+        int memAddress = i*2;
+        *(video_memory+memAddress) = 'h';
+        *(video_memory+memAddress+1) = attributes;
+    }
+    cursorX = 0;
+    cursorY = 0;
+    return;
+}
