@@ -1,9 +1,7 @@
-name: Makefile CI
+name: Build YaOS
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
     branches: [ "main" ]
 
 jobs:
@@ -13,6 +11,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: Set up NASM
+      uses: ilammy/setup-nasm@v1.5.1
+
+    - name: Install Clang
+      uses: egor-tensin/setup-clang@v2.3
 
     - name: Compile the OS
       run: make
