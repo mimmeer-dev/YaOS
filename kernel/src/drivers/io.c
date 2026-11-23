@@ -22,3 +22,7 @@ void PIC_sendEOI(uint8_t irq)
 	
 	outb(PIC1_COMMAND,PIC_EOI);
 }
+
+void wait_io(void) {
+    outb(0x80, 0);
+}

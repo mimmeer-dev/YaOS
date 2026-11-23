@@ -1,6 +1,6 @@
 rwildcard = $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $2,$d))
 QEMU := qemu-system-i386
-QEMU_ARGS := -m 1G # this OS will target 1GB of RAM
+QEMU_ARGS := -m 1G -d int,cpu_reset -no-reboot # this OS will target 1GB of RAM
 
 # Directories #
 BOOTLD_DIR := ./bootloader
@@ -21,7 +21,7 @@ KRNL_SRC_FILES := $(KRNL_ASM_FILES) $(KRNL_C_FILES)
 .PHONY: run, clean
 
 $(FLOPPY_IMG): $(BOOTLD_OUT) $(KERNEL_OUT)
-	mkdir -p dist
+	mkdir -p build
 	dd if=/dev/zero of=$(FLOPPY_IMG) bs=512 count=2880
 	dd if=$(BOOTLD_OUT) of=$(FLOPPY_IMG) conv=notrunc
 	dd if=$(KERNEL_OUT) of=$(FLOPPY_IMG) bs=512 seek=1 conv=notrunc
