@@ -14,6 +14,7 @@ MAIN_ASM_STG1 := $(SRC_DIR)/main.asm
 .PHONY: clean
 
 $(OUTPUT_STG1): $(MAIN_ASM_STG1)
+	mkdir -p build
 	nasm -f bin -o $(OUTPUT_STG1) $(MAIN_ASM_STG1)
 
 clean:

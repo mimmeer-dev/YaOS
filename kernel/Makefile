@@ -16,6 +16,7 @@ SRC_FILES := $(ASM_FILES) $(C_FILES)
 OBJS := $(addprefix $(BUILD_DIR)/, $(addsuffix .o, $(basename $(SRC_FILES))))
 
 $(OUTPUT): $(OBJS)
+	mkdir -p build
 	ld.lld -T $(SRC_DIR)/linker.ld $(OBJS) -o $(OUTPUT)
 
 $(BUILD_DIR)/%.o: %.asm
