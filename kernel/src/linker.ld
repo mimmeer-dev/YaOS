@@ -1,8 +1,11 @@
 OUTPUT_FORMAT("binary")
-ENTRY(_kentry)
+ENTRY(loader)
 SECTIONS {
     . = 0x1000;
-    .text : { *(.text*) }
+    .text : {
+        KEEP(*(.text.entry))
+        *(.text*)
+    }
     .rodata : { *(.rodata*) }
     .data : { *(.data*) }
 }

@@ -49,7 +49,7 @@ void PIC_init() {
 }
 
 void _kentry() {
-    PIC_init();
+    //PIC_init();
     menu();
     while (true) {
         if (inb(0x64) & 1) {
