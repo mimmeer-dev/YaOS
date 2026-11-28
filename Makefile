@@ -22,6 +22,7 @@ KRNL_SRC_FILES := $(KRNL_ASM_FILES) $(KRNL_C_FILES)
 
 $(FLOPPY_IMG): $(BOOTLD_OUT) $(KERNEL_OUT)
 	mkdir -p build
+	mkdir -p dist
 	dd if=/dev/zero of=$(FLOPPY_IMG) bs=512 count=2880
 	dd if=$(BOOTLD_OUT) of=$(FLOPPY_IMG) conv=notrunc
 	dd if=$(KERNEL_OUT) of=$(FLOPPY_IMG) bs=512 seek=1 conv=notrunc
